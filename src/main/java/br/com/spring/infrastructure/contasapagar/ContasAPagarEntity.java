@@ -1,4 +1,4 @@
-package br.com.spring.domain.contasapagar;
+package br.com.spring.infrastructure.contasapagar;
 
 import lombok.Builder;
 import lombok.Getter;

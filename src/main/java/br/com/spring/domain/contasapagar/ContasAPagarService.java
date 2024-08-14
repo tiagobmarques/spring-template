@@ -1,5 +1,6 @@
 package br.com.spring.domain.contasapagar;
 
+import br.com.spring.infrastructure.contasapagar.ContasAPagarEntity;
 import br.com.spring.infrastructure.contasapagar.ContasAPagarRepository;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,10 +20,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
+@RequiredArgsConstructor
 public class ContasAPagarService {
 
-  @Autowired
-  private ContasAPagarRepository repository;
+  private final ContasAPagarRepository repository;
 
   public ContasAPagarEntity save(final ContasAPagarEntity contasAPagarEntity) {
     return repository.save(contasAPagarEntity);

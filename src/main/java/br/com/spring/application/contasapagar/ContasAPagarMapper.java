@@ -1,37 +1,67 @@
 package br.com.spring.application.contasapagar;
 
-import br.com.spring.domain.contasapagar.ContasAPagarEntity;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.ReportingPolicy;
-import org.mapstruct.control.DeepClone;
-import org.mapstruct.factory.Mappers;
+import br.com.spring.infrastructure.contasapagar.ContasAPagarEntity;
+import org.springframework.stereotype.Component;
 
-@Mapper(componentModel = "spring",
-    mappingControl = DeepClone.class,
-    unmappedTargetPolicy = ReportingPolicy.IGNORE)
-public interface ContasAPagarMapper {
+@Component
+public class ContasAPagarMapper {
 
-  ContasAPagarMapper INSTANCE = Mappers.getMapper(ContasAPagarMapper.class);
+  public ContasAPagarResponse toResponse(ContasAPagarEntity entity) {
+    if (entity == null) {
+      return null;
+    }
 
-  ContasAPagarResponse toResponse(ContasAPagarEntity contasAPagarEntity);
+    return ContasAPagarResponse.builder()
+            .id(entity.getId())
+            .dataVencimento(entity.getDataVencimento())
+            .dataPagamento(entity.getDataPagamento())
+            .valor(entity.getValor())
+            .descricao(entity.getDescricao())
+            .situacao(entity.getSituacao())
+            .build();
+  }
 
-  ContasAPagarEntity toEntity(ContasAPagarRequest contasAPagarRequest);
+  public ContasAPagarEntity toEntity(ContasAPagarRequest request) {
+    if (request == null) {
+      return null;
+    }
 
-  @Mapping(source = "contasAPagarEntity.id", target = "id")
-  @Mapping(source = "contasAPagarRequest.dataVencimento", target = "dataVencimento")
-  @Mapping(source = "contasAPagarRequest.dataPagamento", target = "dataPagamento")
-  @Mapping(source = "contasAPagarRequest.valor", target = "valor")
-  @Mapping(source = "contasAPagarRequest.descricao", target = "descricao")
-  @Mapping(source = "contasAPagarRequest.situacao", target = "situacao")
-  ContasAPagarEntity toEntity(ContasAPagarEntity contasAPagarEntity, ContasAPagarRequest contasAPagarRequest);
+    return ContasAPagarEntity.builder()
+            .dataVencimento(request.getDataVencimento())
+            .dataPagamento(request.getDataPagamento())
+            .valor(request.getValor())
+            .descricao(request.getDescricao())
+            .situacao(request.getSituacao())
+            .build();
+  }
 
-  @Mapping(source = "contasAPagarEntity.id", target = "id")
-  @Mapping(source = "contasAPagarEntity.dataVencimento", target = "dataVencimento")
-  @Mapping(source = "contasAPagarEntity.dataPagamento", target = "dataPagamento")
-  @Mapping(source = "contasAPagarEntity.valor", target = "valor")
-  @Mapping(source = "contasAPagarEntity.descricao", target = "descricao")
-  @Mapping(source = "contasAPagarRequest.situacao", target = "situacao")
-  ContasAPagarEntity toEntitySituacao(ContasAPagarEntity contasAPagarEntity, ContasAPagarRequest contasAPagarRequest);
+  public ContasAPagarEntity toEntity(ContasAPagarEntity existingEntity, ContasAPagarRequest request) {
+    if (existingEntity == null || request == null) {
+      return null;
+    }
 
+    return ContasAPagarEntity.builder()
+            .id(existingEntity.getId())
+            .dataVencimento(request.getDataVencimento())
+            .dataPagamento(request.getDataPagamento())
+            .valor(request.getValor())
+            .descricao(request.getDescricao())
+            .situacao(request.getSituacao())
+            .build();
+  }
+
+  public ContasAPagarEntity toEntitySituacao(ContasAPagarEntity existingEntity, ContasAPagarRequest request) {
+    if (existingEntity == null || request == null) {
+      return null;
+    }
+
+    return ContasAPagarEntity.builder()
+            .id(existingEntity.getId())
+            .dataVencimento(existingEntity.getDataVencimento())
+            .dataPagamento(existingEntity.getDataPagamento())
+            .valor(existingEntity.getValor())
+            .descricao(existingEntity.getDescricao())
+            .situacao(request.getSituacao())
+            .build();
+  }
 }

@@ -7,7 +7,7 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import br.com.spring.domain.contasapagar.ContasAPagarEntity;
+import br.com.spring.infrastructure.contasapagar.ContasAPagarEntity;
 import br.com.spring.domain.contasapagar.ContasAPagarService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.math.BigDecimal;
@@ -41,9 +41,6 @@ class ContasAPagarControllerTest {
 
   @MockBean
   private ContasAPagarService service;
-
-  @SpyBean(ContasAPagarMapperImpl.class)
-  private ContasAPagarMapper mapper;
 
   @Autowired
   private ObjectMapper objectMapper;

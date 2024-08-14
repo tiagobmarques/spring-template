@@ -8,7 +8,7 @@ import static org.mockito.Mockito.anyString;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
-import br.com.spring.domain.contasapagar.ContasAPagarEntity;
+import br.com.spring.infrastructure.contasapagar.ContasAPagarEntity;
 import br.com.spring.domain.contasapagar.ContasAPagarService;
 import br.com.spring.infrastructure.contasapagar.ContasAPagarRepository;
 import java.math.BigDecimal;
