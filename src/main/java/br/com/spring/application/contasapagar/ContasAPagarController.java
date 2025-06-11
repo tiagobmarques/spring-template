@@ -120,26 +120,26 @@ public class ContasAPagarController {
     return service.getTotalPagoPorPeriodo(startDate, endDate);
   }
 
-//  @ApiOperation(value = "Obtém contas a pagar paginadas por vencimento e descrição")
-//  @ApiResponses(value = {
-//      @ApiResponse(code = 200, message = "Contas pagas obtidas com sucesso", response = Page.class),
-//      @ApiResponse(code = 400, message = "Dados inválidos fornecidos"),
-//      @ApiResponse(code = 500, message = "Erro interno do servidor")
-//  })
-//  @GetMapping
-//  public Page<ContasAPagarResponse> getContasPaginadasPorVencimentoEDescricao(
-//      @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
-//      @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate,
-//      @RequestParam(value = "descricao", required = false, defaultValue = "") String descricao,
-//      @RequestParam(value = "page", defaultValue = "0") int page,
-//      @RequestParam(value = "size", defaultValue = "10") int size) {
-//
-//    Pageable pageable = PageRequest.of(page, size);
-//    Page<ContasAPagarEntity> contas = service.getContasPaginadasPorVencimentoEDescricao(startDate,
-//        endDate, descricao, pageable);
-//
-//    return contas.map(ContasAPagarMapper.toResponse());
-//  }
+  @ApiOperation(value = "Obtém contas a pagar paginadas por vencimento e descrição")
+  @ApiResponses(value = {
+      @ApiResponse(code = 200, message = "Contas pagas obtidas com sucesso", response = Page.class),
+      @ApiResponse(code = 400, message = "Dados inválidos fornecidos"),
+      @ApiResponse(code = 500, message = "Erro interno do servidor")
+  })
+  @GetMapping
+  public Page<ContasAPagarResponse> getContasPaginadasPorVencimentoEDescricao(
+      @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+      @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate,
+      @RequestParam(value = "descricao", required = false, defaultValue = "") String descricao,
+      @RequestParam(value = "page", defaultValue = "0") int page,
+      @RequestParam(value = "size", defaultValue = "10") int size) {
+
+    Pageable pageable = PageRequest.of(page, size);
+    Page<ContasAPagarEntity> contas = service.getContasPaginadasPorVencimentoEDescricao(startDate,
+        endDate, descricao, pageable);
+
+    return contas.map(mapper::toResponse);
+  }
 
   @ApiOperation(value = "Importa contas a pagar de um arquivo CSV")
   @ApiResponses(value = {
